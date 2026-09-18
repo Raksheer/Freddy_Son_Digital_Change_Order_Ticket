@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Freddy & Son — Digital Change Order Ticket</title>
+<style>
+  :root { --blue:#173f8f; --blue2:#2457b5; --ink:#172033; --muted:#64748b; --line:#d7dee8; --bg:#f4f7fb; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
+  .page { max-width:850px; margin:0 auto; padding:16px; }
+  .card { background:white; border:1px solid var(--line); border-radius:16px; box-shadow:0 5px 20px rgba(20,40,80,.07); overflow:hidden; }
+  header { padding:18px 20px 14px; border-bottom:4px solid var(--blue); display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .brand { display:flex; align-items:center; gap:12px; }
+  .logo { width:72px; height:58px; flex:none; }
+  .brand h1 { margin:0; font-size:23px; letter-spacing:.3px; }
+  .brand .sub { margin-top:2px; color:var(--muted); font-size:12px; font-weight:600; }
+  .ticket-title { text-align:right; }
+  .ticket-title strong { display:block; color:var(--blue); font-size:18px; }
+  .ticket-title span { color:var(--muted); font-size:12px; }
+  main { padding:20px; }
+  .section { margin-bottom:20px; }
+  .section h2 { font-size:14px; text-transform:uppercase; letter-spacing:.7px; color:var(--blue); margin:0 0 10px; }
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .field { display:flex; flex-direction:column; gap:6px; }
+  label { font-size:12px; font-weight:700; color:#475569; }
+  input, textarea { width:100%; border:1px solid var(--line); border-radius:9px; padding:12px; font:inherit; font-size:16px; background:#fff; color:var(--ink); }
+  textarea { min-height:170px; resize:vertical; line-height:1.45; }
+  input:focus, textarea:focus { outline:3px solid rgba(36,87,181,.12); border-color:var(--blue2); }
+  .sig-wrap { border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff; }
+  #signature { width:100%; height:190px; display:block; touch-action:none; background:linear-gradient(#fff,#fff) padding-box; }
+
+  .sig-bottom { display:flex; justify-content:space-between; align-items:center; padding:8px 10px; border-top:1px solid var(--line); background:#f8fafc; }
+  .hint { font-size:12px; color:var(--muted); }
+  button { border:0; border-radius:9px; padding:11px 15px; font-weight:700; font-size:14px; cursor:pointer; }
+  .secondary { background:#e8eef8; color:var(--blue); }
+  .primary { background:var(--blue); color:white; }
+  .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+  .notice { background:#eef4ff; border-left:4px solid var(--blue); padding:11px 12px; border-radius:7px; font-size:12px; color:#334155; margin-bottom:18px; }
+  footer { padding:13px 20px 18px; color:var(--muted); font-size:11px; text-align:center; }
+  .required::after { content:" *"; color:#c62828; }
+  .logo {
+    height: 45px;
+  }
+  @media (max-width:620px) {
+    .page { padding:8px; }
+    header { padding:14px; }
+    .ticket-title { display:none; }
+    main { padding:14px; }
+    .grid { grid-template-columns:1fr; }
+    .brand h1 { font-size:20px; }
+  }
+  @media print {
+    body { background:white; }
+    .page { max-width:none; padding:0; }
+    .card { border:0; box-shadow:none; }
+    .actions, .notice { display:none; }
+    input, textarea { border:1px solid #bbb; }
+    #signature { height:150px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="card">
+    <header>
+      <div class="brand">
+        <!-- Brand lockup based on Freddy & Son's public roof/wordmark styling -->
+        <img class="logo" src="https://freddyandson.com/wp-content/uploads/2026/06/image-15.png">
+        <div>
+          <h1>FREDDY &amp; SON</h1>
+          <div class="sub">ROOFING • SIDING • EXTERIOR SYSTEMS</div>
+        </div>
+      </div>
+      <div class="ticket-title">
+        <strong>FIELD CHANGE ORDER TICKET</strong>
+        <span>Digital Project-Site Form</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="notice">
+        Complete this ticket at the project site. The signed ticket documents the field-requested change or extra work.
+      </div>
+
+      <section class="section">
+        <h2>Project Information</h2>
+        <div class="grid">
+          <div class="field">
+            <label class="required">Date</label>
+            <input id="date" type="date" required>
+          </div>
+          <div class="field">
+            <label>Ticket / Reference No.</label>
+            <input id="ticket" type="text" placeholder="Optional">
+          </div>
+          <div class="field">
+            <label class="required">Project Name</label>
+            <input id="project" type="text" placeholder="Project name" required>
+          </div>
+          <div class="field">
+            <label class="required">Project / Work Location</label>
+            <input id="location" type="text" placeholder="Building, unit, floor, elevation, etc." required>
+          </div>
+          <div class="field">
+            <label>Requested By</label>
+            <input id="requestedBy" type="text" placeholder="GC / Owner / Superintendent">
+          </div>
+          <div class="field">
+            <label>Freddy &amp; Son Representative</label>
+            <input id="rep" type="text" placeholder="Name">
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Change Order Description</h2>
+        <div class="field">
+          <label class="required">Describe the additional / changed work</label>
+          <textarea id="description" placeholder="Describe exactly what changed, why it is required, affected areas, quantities, materials, labor, access issues, or other field conditions." required></textarea>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Site Authorization</h2>
+        <div class="grid">
+          <div class="field">
+            <label>Estimated Quantity / Unit</label>
+            <input id="quantity" type="text" placeholder="e.g., 120 LF, 400 SF, 8 hrs">
+          </div>
+          <div class="field">
+            <label>Cost / Pricing Reference</label>
+            <input id="cost" type="text" placeholder="Optional — attach pricing separately">
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Authorization Signature</h2>
+        <div class="field">
+          <label class="required">Authorized Signer — sign with your finger or stylus</label>
+          <div class="sig-wrap">
+            <canvas id="signature"></canvas>
+            <div class="sig-bottom">
+              <span class="hint">Signature confirms the field change/work described above.</span>
+              <button type="button" class="secondary" onclick="clearSignature()">Clear</button>
+            </div>
+          </div>
+        </div>
+        <div class="grid" style="margin-top:12px">
+          <div class="field">
+            <label class="required">Printed Name</label>
+            <input id="signerName" type="text" placeholder="Name" required>
+          </div>
+          <div class="field">
+            <label>Title / Company</label>
+            <input id="signerTitle" type="text" placeholder="Title / company">
+          </div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="button" class="primary" onclick="printTicket()">Print / Save as PDF</button>
+        <button type="button" class="secondary" onclick="saveDraft()">Save Draft on This Phone</button>
+        <button type="button" class="secondary" onclick="clearForm()">Clear Form</button>
+      </div>
+    </main>
+    <footer>
+      Freddy &amp; Son • Digital Field Change Order Ticket • Complete one ticket per change/extra-work request.
+    </footer>
+  </div>
+</div>
+
+<script>
+const fields = ["date","ticket","project","location","requestedBy","rep","description","quantity","cost","signerName","signerTitle"];
+document.getElementById("date").value = new Date().toISOString().slice(0,10);
+
+const canvas = document.getElementById("signature");
+const ctx = canvas.getContext("2d");
+canvas.style.touchAction = "none";
+canvas.style.webkitUserSelect = "none";
+canvas.style.userSelect = "none";
+let drawing = false, hasSignature = false;
+
+function resizeCanvas() {
+  const ratio = Math.max(window.devicePixelRatio || 1, 1);
+  const rect = canvas.getBoundingClientRect();
+  const old = canvas.toDataURL();
+  canvas.width = Math.round(rect.width * ratio);
+  canvas.height = Math.round(rect.height * ratio);
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  ctx.lineWidth = 2.2;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  if (hasSignature) {
+    const img = new Image();
+    img.onload = () => ctx.drawImage(img,0,0,rect.width,rect.height);
+    img.src = old;
+  }
+}
+function point(e) {
+  const r = canvas.getBoundingClientRect();
+  const p = e.touches ? e.touches[0] : e;
+  return {x:p.clientX-r.left, y:p.clientY-r.top};
+}
+function start(e){ e.preventDefault(); canvas.setPointerCapture(e.pointerId); drawing=true; const p=point(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); }
+function move(e){ if(!drawing)return; e.preventDefault(); const p=point(e); ctx.lineTo(p.x,p.y); ctx.stroke(); hasSignature=true; }
+function end(e){ drawing=false; }
+canvas.addEventListener("pointerdown",start);
+canvas.addEventListener("pointermove",move);
+canvas.addEventListener("pointerup",end);
+canvas.addEventListener("pointercancel",end);
+window.addEventListener("resize",resizeCanvas);
+["touchstart","touchmove"].forEach(ev =>
+  canvas.addEventListener(ev, e => e.preventDefault(), { passive: false })
+);
+canvas.addEventListener("contextmenu", e => e.preventDefault());
+if (!window.PointerEvent) {
+  canvas.addEventListener("touchstart", e => {
+    e.preventDefault();
+    drawing = true;
+    const p = point(e);
+    ctx.beginPath(); ctx.moveTo(p.x, p.y);
+  }, { passive: false });
+  canvas.addEventListener("touchmove", e => {
+    if (!drawing) return;
+    e.preventDefault();
+    const p = point(e);
+    ctx.lineTo(p.x, p.y); ctx.stroke();
+    hasSignature = true;
+  }, { passive: false });
+  canvas.addEventListener("touchend", () => { drawing = false; });
+}
+resizeCanvas();
+["pointerdown","pointermove","pointerup","pointercancel"].forEach(t =>
+  canvas.addEventListener(t, e => console.log(t, e.pointerType))
+);
+
+function clearSignature(){ ctx.clearRect(0,0,canvas.width,canvas.height); hasSignature=false; }
+function saveDraft(){
+  const data={};
+  fields.forEach(id=>data[id]=document.getElementById(id).value);
+  data.signature=hasSignature ? canvas.toDataURL("image/png") : "";
+  localStorage.setItem("freddySonChangeOrderDraft",JSON.stringify(data));
+  alert("Draft saved on this phone.");
+}
+function loadDraft(){
+  try{
+    const data=JSON.parse(localStorage.getItem("freddySonChangeOrderDraft")||"null");
+    if(!data)return;
+    fields.forEach(id=>{ if(data[id]!==undefined) document.getElementById(id).value=data[id]; });
+    if(data.signature){
+      const img=new Image(); img.onload=()=>{ const r=canvas.getBoundingClientRect(); ctx.drawImage(img,0,0,r.width,r.height); hasSignature=true; }; img.src=data.signature;
+    }
+  }catch(e){}
+}
+function clearForm(){
+  if(!confirm("Clear all ticket information?")) return;
+  fields.forEach(id=>document.getElementById(id).value="");
+  document.getElementById("date").value=new Date().toISOString().slice(0,10);
+  clearSignature();
+}
+function printTicket(){
+  const required=["date","project","location","description","signerName"];
+  const missing=required.filter(id=>!document.getElementById(id).value.trim());
+  if(missing.length || !hasSignature){
+    alert("Please complete the required fields and collect the signature before printing.");
+    return;
+  }
+  window.print();
+}
+loadDraft();
+</script>
+</body>
+</html>
