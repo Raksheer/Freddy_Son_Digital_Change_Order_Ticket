@@ -861,21 +861,20 @@
     '</div>';
   }
 
-  $('exportBtn').addEventListener('click', ()=>{
-    const data = collectForm();
-    const printArea = $('printArea');
-    printArea.innerHTML = buildPrintable(data);
-    printArea.style.display = 'block';
-    function HideAfterPrint(){
-      printArea.style.display = 'none';
-      window.removeEventListener('afterprint', HideAfterPrint);
-    }
-    window.addEventListener('afterprint', HideAfterPrint);
-    setTimeout(()=>{
-      window.print(),100;
-      printArea.style.display = 'none';
-    }, 100);
-  });
+ $('exportBtn').addEventListener('click', ()=>{
+  const data = collectForm();
+  const printArea = $('printArea');
+  printArea.innerHTML = buildPrintable(data);
+  printArea.style.display = 'block';
+  function HideAfterPrint(){
+    printArea.style.display = 'none';
+    window.removeEventListener('afterprint', HideAfterPrint);
+  }
+  window.addEventListener('afterprint', HideAfterPrint);
+  setTimeout(()=>{
+    window.print();
+  }, 100);
+});
 
   $('exportPdfBtn').addEventListener('click', async ()=>{
     const btn = $('exportPdfBtn');
