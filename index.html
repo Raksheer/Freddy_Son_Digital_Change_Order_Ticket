@@ -866,6 +866,11 @@
     const printArea = $('printArea');
     printArea.innerHTML = buildPrintable(data);
     printArea.style.display = 'block';
+    function HideAfterPrint(){
+      printArea.style.display = 'none';
+      window.removeEventListener('afterprint', HideAfterPrint);
+    }
+    window.addEventListener('afterprint', HideAfterPrint);
     setTimeout(()=>{
       window.print();
       printArea.style.display = 'none';
