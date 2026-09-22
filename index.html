@@ -837,6 +837,17 @@
   // ---------- export / print summary ----------
   function buildPrintable(data){
     const photosHtml = (data.photos||[]).map(p=>'<img src="'+p+'" style="width:100%;max-width:220px;border-radius:8px;margin:4px;border:1px solid #ccc;">').join('');
+
+    const costAmount = parseFloat(data.costImpact);
+    const hasCostAmount = !isNaN(costAmount) && costAmount !== 0;
+    const costValue = data.costType==='Yes'
+      ? 'Yes' + (hasCostAmount ? ' ($'+data.costImpact+')' : ' (TBD)')
+      : (data.costType || '—');
+
+    const scheduleAmount = parseFloat(data.scheduleImpact);
+    const hasScheduleAmount = !isNaN(scheduleAmount) && scheduleAmount !== 0;
+    const scheduleValue = hasScheduleAmount ? (data.scheduleImpact+' day(s)') : 'TBD';
+
     return '' +
     '<div style="font-family:-apple-system,Helvetica,Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;color:#111;">' +
     '<div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">' +
@@ -852,8 +863,8 @@
     '<p><strong>Description of change:</strong><br>'+(data.description||'').replace(/\n/g,'<br>')+'</p>' +
     '<p><strong>Reason:</strong> '+(data.reason||'—')+'</p>' +
     (data.notes? '<p><strong>Notes:</strong><br>'+data.notes.replace(/\n/g,'<br>')+'</p>' : '') +
-    '<p><strong>Cost impact:</strong> '+(data.costType||'—')+(data.costType==='Yes' ? ' ($'+(data.costImpact||'0')+')' : '')+'</p>' +
-    '<p><strong>Schedule impact:</strong> '+(data.scheduleImpact||'0')+' day(s)</p>' +
+    '<p><strong>Cost impact:</strong> '+costValue+'</p>' +
+    '<p><strong>Schedule impact:</strong> '+scheduleValue+'</p>' +
     (photosHtml? '<p><strong>Photos:</strong></p><div>'+photosHtml+'</div>' : '') +
     '<p style="margin-top:24px;"><strong>Signed by:</strong> '+(data.signerName||'')+' ('+(data.signerTitle||'')+')</p>' +
     (data.signature? '<img src="'+data.signature+'" style="max-width:280px;border-bottom:1px solid #333;">' : '<p style="color:#999;">No signature captured</p>') +
